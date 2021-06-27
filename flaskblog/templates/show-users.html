@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid media content-section">
+    <div class="container">
+        <h1 class="article-title">Contacted Person</h1>
+    </div>
+</div>
+<table class="table table-dark">
+
+    <thead>
+    <tr>
+        <th scope="col">User ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Contact Date</th>
+        <th scope="col">Content</th>
+        <th scope="col">Send Response</th>
+    </tr>
+    </thead>
+    {% for post in contacts.items %}
+    <!--        <article class="media content-section">-->
+    <!--          <div class="media-body">-->
+    <!--            <div class="article-metadata">-->
+    <!--              <a class="mr-2" href="{{ url_for('users.user_posts', username=post.username) }}">{{ post.username }}</a>-->
+    <!--              <small class="text-muted">{{ post.contact_posted.strftime('%Y-%m-%d') }}</small>-->
+    <!--            </div>-->
+    <!--            <p class="article-content">{{ post.content }} </p> <a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">see more</a>-->
+    <!--          </div>-->
+    <!--        </article>-->
+
+    <tbody>
+    <tr>
+        <th>{{post.id}}</th>
+        <th scope="row">{{ post.username }}</th>
+        <td>{{ post.email }}</td>
+        <td>{{ post.phone }}</td>
+        <td>{{ post.contact_posted.strftime('%Y-%m-%d') }}</td>
+        <td >{{ post.content }}</td>
+        {% if post.is_seen == 0 %}
+            <td>
+                <button type="button" class="btn btn-info btn-sm m-1" data-toggle="modal" data-target="#sendResponseModal{{post.id}}">
+                    Send Response
+                </button>
+            </td>
+        {% else %}
+        <td>
+                <button type="button" class="btn btn-info btn-sm m-1" data-toggle="modal" data-target="#sendResponseModal{{post.id}}" disabled>
+                    Send Response
+                </button>
+            </td>
+        {% endif %}
+    </tr>
+    </tbody>
+
+<div class="modal fade" id="sendResponseModal{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="#sendResponseModal{{post.id}}" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="{{ url_for('users.show_all_users') }}">
+
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name" name="recipient" value="{{post.email}}">
+          </div>
+
+            <div class="form-group">
+            <label for="user-query" class="col-form-label">User Query:</label>
+            <input type="text" class="form-control" id="user-query" name="user-query" value="{{post.content}}">
+          </div>
+
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <textarea class="form-control" id="message-text" name="msg"></textarea>
+          </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" name="submit" value="submit">Send message</button>
+<!--       <a class="btn btn-primary" href="{{ url_for('users.show_all_users') }}">Send message</a>-->
+      </div>
+             </form>
+      </div>
+    </div>
+  </div>
+</div>
+    {% endfor %}
+</table>
+{% for page_num in contacts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+{% if page_num %}
+{% if contacts.page == page_num %}
+<a class="btn btn-info mb-4" href="{{ url_for('users.show_all_users', page=page_num) }}">{{ page_num }}</a>
+{% else %}
+<a class="btn btn-outline-info mb-4" href="{{ url_for('users.show_all_users', page=page_num) }}">{{ page_num }}</a>
+{% endif %}
+{% else %}
+{% endif %}
+{% endfor %}
+{% endblock content %}
