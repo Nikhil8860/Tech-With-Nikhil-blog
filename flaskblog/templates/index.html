@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="container-fluid c-course p-3">
+    <!-- Python  Full Stack Development -->
+    <h4 style="color:white" class="navbar-brand mr-4" id="python">Python Full Stack Development</h4>
+        <section class="row row-cols-2 row-cols-lg-5" id ="section1">
+            <div class="col my-1">
+                <span class="badge bg-warning text-dark">Most Popular</span>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='course_img/python.jpg')}}" class="card-img-top" alt="Python">
+                    <div class="card-body">
+                    <h5 class="card-title m-0 ">Python</h5>
+                    <!-- <p class="card-text"><small class="text-muted">Curriculum- 27 Modules.</small></p> -->
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ url_for('course.python') }}" class="btn btn-danger">Course Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col my-1">
+                <span class="badge bg-warning text-dark">Most Popular</span>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='course_img/django.jpg')}}" class="card-img-top" alt="Django Framework">
+                    <div class="card-body">
+                    <h5 class="card-title m-0">Django Framework</h5>
+                    <!-- <p class="card-text"><small class="text-muted">Curriculum- 27 Modules.</small></p> -->
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ url_for('course.django') }}" class="btn btn-danger">Course Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col my-1">
+                <span class="badge bg-warning text-dark">Most Popular</span>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='course_img/flask-logo.png')}}" class="card-img-top" alt="Flask Framework">
+                    <div class="card-body">
+                    <h5 class="card-title m-0">Flask Framework</h5>
+                    <!-- <p class="card-text"><small class="text-muted">Curriculum- 27 Modules.</small></p> -->
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ url_for('course.flask') }}" class="btn btn-danger">Course Details</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </section>
+<section class="container-fluid c-course p-3">
+    <!-- Data Structure and Algorithm -->
+        <h4 style="color:white" class="navbar-brand mr-4" id="dsa">Data Structure and Algorithm</h4>
+        <section class="row row-cols-2 row-cols-lg-5 " id = "section2">
+            <div class="col my-1">
+                <span class="badge bg-warning text-dark">Most Popular</span>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='course_img/dsa.jpg')}}" class="card-img-top" alt="Data Structure and Algorithm ">
+                    <div class="card-body">
+                    <h5 class="card-title m-0">Data Structure and Algorithm</h5>
+                    <!-- <p class="card-text"><small class="text-muted">Curriculum- 27 Modules.</small></p> -->
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ url_for('course.dsa') }}" class="btn btn-danger">Course Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col my-1">
+                <span class="badge bg-warning text-dark">Most Popular</span>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='course_img/django.jpg')}}" class="card-img-top" alt="Django Framework">
+                    <div class="card-body">
+                    <h5 class="card-title m-0">Django Framework</h5>
+                    <!-- <p class="card-text"><small class="text-muted">Curriculum- 27 Modules.</small></p> -->
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ url_for('course.django') }}" class="btn btn-danger">Course Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col my-1">
+                <span class="badge bg-warning text-dark">Most Popular</span>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='course_img/flask-logo.png')}}" class="card-img-top" alt="Flask Framework">
+                    <div class="card-body">
+                    <h5 class="card-title m-0">Flask Framework</h5>
+                    <!-- <p class="card-text"><small class="text-muted">Curriculum- 27 Modules.</small></p> -->
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ url_for('course.flask') }}" class="btn btn-danger">Course Details</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </section>
+
+{% endblock content %}
+{% block content1 %}
+{%  include "course/left-bar-admin.html" %}
+{% endblock content1 %}

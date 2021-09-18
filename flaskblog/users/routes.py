@@ -5,6 +5,7 @@ from flaskblog.models import User, Post, Contact
 from flaskblog.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                                    RequestResetForm, ResetPasswordForm, ContactForm)
 from flaskblog.users.utils import save_picture, send_reset_email, sendmail_attach_mktcloud
+from sqlalchemy import desc
 
 users = Blueprint('users', __name__)
 
@@ -44,7 +45,8 @@ def login():
 @users.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for('main.home'))
+    # return redirect(url_for('main.home'))
+    return redirect(url_for('main.course'))
 
 
 @users.route("/account", methods=['GET', 'POST'])
@@ -79,7 +81,7 @@ def user_posts(username):
     return render_template('user_posts.html', posts=posts, user=user)
 
 
-@users.route("/reset_password", methods=['GET', 'POST'])
+@users.route("/reset-password", methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
@@ -92,7 +94,7 @@ def reset_request():
     return render_template('reset_request.html', title='Reset Password', form=form)
 
 
-@users.route("/reset_password/<token>", methods=['GET', 'POST'])
+@users.route("/reset-password/<token>", methods=['GET', 'POST'])
 def reset_token(token):
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
@@ -138,8 +140,8 @@ def show_all_users():
         email = request.form.get('recipient')
         content = request.form.get('msg')
         user_query = request.form.get('user-query')
-        data = Contact.query.filter_by(email=email).first()
-
+        # data = Contact.query.filter_by(email=email).first()
+        data = Contact.query.order_by(desc(Contact.id)).first()
         sendmail_attach_mktcloud(email, content, user_query)
         if data:
             data.is_seen = 1
@@ -147,7 +149,7 @@ def show_all_users():
             db.session.commit()
         flash("Mail send successfully!", "info")
     page = request.args.get('page', 1, type=int)
-    contact = Contact.query.order_by(Contact.contact_posted.asc()).paginate(page=page, per_page=5)
+    contact = Contact.query.order_by(Contact.contact_posted.desc()).paginate(page=page, per_page=5)
     new_users = len(Contact.query.filter_by(is_seen=0).all())
     return render_template('show-users.html', contacts=contact, title='show users', new_user=new_users)
 
@@ -156,7 +158,6 @@ def show_all_users():
 @login_required
 def show_all_users_new():
     new_users = Contact.query.all()
-
     print("HELO")
     flash("Mail send successfully!", "info")
     return render_template('show-users.html')

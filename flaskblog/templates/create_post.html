@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+
 <div class="content-section">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
@@ -18,8 +19,19 @@
                     {{ form.title(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
+<!--            <p class="form-control-label">-->
+<!--            Choose Course :<SELECT class="form-control form-control-lg" name="jobid" style="font-family:verdana">-->
+<!--            {% for j in course_list %}-->
+<!--                <OPTION class="dropdown-item" value={{j.id}}>{{j.course_name}}</OPTION>-->
+<!--            {% endfor %}-->
+<!--            </SELECT>-->
+<!--            </p>-->
             <div class="form-group">
-<!--                {{ form.content.label(class="form-control-label") }}-->
+                {{ form.course.label }}
+                {{ form.course(class="form-control form-control-lg")}}
+            </div>
+            <div class="form-group">
+                {{ form.content.label(class="form-control-label") }}
                 {{form.content(rows='10',cols='75')}}
 <!--                {% if form.content.errors %}-->
 <!--                    {{ form.content(class="form-control form-control-lg is-invalid") }}-->

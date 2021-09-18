@@ -65,3 +65,4 @@ def sendmail_attach_mktcloud(to_mail, content=None, users_query=None):
         server.login(sender_email, password=password)
         server.sendmail(sender_email, receiver_email, text)
         print("Sent email with Subject --", subject)
+

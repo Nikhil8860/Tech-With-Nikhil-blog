@@ -2,7 +2,7 @@ from flask import (render_template, url_for, flash,
                    redirect, request, abort, Blueprint)
 from flask_login import current_user, login_required
 from flaskblog import db
-from flaskblog.models import Post, User
+from flaskblog.models import Post, User, Course
 from flaskblog.posts.forms import PostForm
 
 posts = Blueprint('posts', __name__)
@@ -12,14 +12,16 @@ posts = Blueprint('posts', __name__)
 @login_required
 def new_post():
     form = PostForm()
+    course = Course.query.all()
     if form.validate_on_submit():
-        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        course_id = Course.query.filter_by(course_name=form.course.data).first()
+        post = Post(title=form.title.data, content=form.content.data, author=current_user, course_id=course_id.id)
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created!', 'success')
         return redirect(url_for('main.home'))
     return render_template('create_post.html', title='New Post',
-                           form=form, legend='New Post')
+                           form=form, legend='New Post', course_list=course)
 
 
 @posts.route("/post/<int:post_id>")
@@ -33,6 +35,7 @@ def post(post_id):
 def update_post(post_id):
     post = Post.query.get_or_404(post_id)
     user = User.query.get_or_404(post_id)
+
     print(post)
     print(user.username)
     if post.author != current_user:

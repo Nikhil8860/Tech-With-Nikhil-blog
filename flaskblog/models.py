@@ -41,9 +41,19 @@ class Post(db.Model):
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    course_id = db.Column(db.Integer, nullable=False, default=1)
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
+
+
+class Course(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    course_name = db.Column(db.String(50), nullable=False)
+    # posts = db.relationship('Post', backref='course', lazy=True)
+
+    # def __repr__(self):
+    #     return f"Course('{self.id}', '{self.course_name}')"
 
 
 class Contact(db.Model):
@@ -57,3 +67,25 @@ class Contact(db.Model):
 
     def __repr__(self):
         return f"Contact('{self.username}', '{self.email}', '{self.content}', '{self.contact_posted}', '{self.phone}','{self.id}', '{self.is_seen}')"
+
+
+class AddBatch(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    course_name = db.Column(db.String(120), default=0)
+    days = db.Column(db.String(120), nullable=False)
+    time = db.Column(db.String(120), nullable=False)
+    date = db.Column(db.Date, nullable=False)
+
+    def __repr__(self):
+        return f"Contact('{self.course_name}', '{self.days}', '{self.time}', '{self.date}')"
+
+
+class Enquiry(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120))
+    phone = db.Column(db.String(120), nullable=False)
+    message = db.Column(db.String(120), nullable=True)
+    enquiry_date = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"Enquiry('{self.name}', '{self.phone}', '{self.message}', '{self.enquiry_date}')"

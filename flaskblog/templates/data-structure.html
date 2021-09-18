@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block content %}
+ <div class="jumbotron jumbotron-fluid media content-section">
+  <div class="container">
+    <h1 class="article-title">Welcome to TechWithNikhil</h1>
+    <p class="lead">Now you are at one of the best place.where you can learn python in depth of 10,000 feet and learn all the concepts</p>
+      <p class="lead">
+    <a class="btn btn-primary btn-lg" href="#" role="button">Browse blog</a>
+  </p>
+  </div>
+</div>
+
+{% for post in posts.items %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="{{ url_for('users.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+              <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+            </div>
+            <h2><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content[0:150] }} </p> <a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">see more</a>
+          </div>
+        </article>
+    {% endfor %}
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+      {% if page_num %}
+        {% if posts.page == page_num %}
+          <a class="btn btn-info mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+        {% else %}
+          <a class="btn btn-outline-info mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+        {% endif %}
+      {% else %}
+        ...
+      {% endif %}
+    {% endfor %}
+{% endblock content %}

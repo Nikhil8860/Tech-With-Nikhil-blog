@@ -36,60 +36,66 @@
         <td>{{ post.email }}</td>
         <td>{{ post.phone }}</td>
         <td>{{ post.contact_posted.strftime('%Y-%m-%d') }}</td>
-        <td >{{ post.content }}</td>
+        <td>{{ post.content }}</td>
         {% if post.is_seen == 0 %}
-            <td>
-                <button type="button" class="btn btn-info btn-sm m-1" data-toggle="modal" data-target="#sendResponseModal{{post.id}}">
-                    Send Response
-                </button>
-            </td>
+        <td>
+            <button type="button" class="btn btn-info btn-sm m-1" data-toggle="modal"
+                    data-target="#sendResponseModal{{post.id}}">
+                Send Response
+            </button>
+        </td>
         {% else %}
         <td>
-                <button type="button" class="btn btn-info btn-sm m-1" data-toggle="modal" data-target="#sendResponseModal{{post.id}}" disabled>
-                    Send Response
-                </button>
-            </td>
+            <button type="button" class="btn btn-info btn-sm m-1" data-toggle="modal"
+                    data-target="#sendResponseModal{{post.id}}" disabled>
+                Send Response
+            </button>
+        </td>
         {% endif %}
     </tr>
     </tbody>
 
-<div class="modal fade" id="sendResponseModal{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="#sendResponseModal{{post.id}}" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form method="POST" action="{{ url_for('users.show_all_users') }}">
+    <div class="modal fade" id="sendResponseModal{{post.id}}" tabindex="-1" role="dialog"
+         aria-labelledby="#sendResponseModal{{post.id}}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ url_for('users.show_all_users') }}">
 
-          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Recipient:</label>
-            <input type="text" class="form-control" id="recipient-name" name="recipient" value="{{post.email}}">
-          </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Recipient:</label>
+                            <input type="text" class="form-control" id="recipient-name" name="recipient"
+                                   value="{{post.email}}">
+                        </div>
 
-            <div class="form-group">
-            <label for="user-query" class="col-form-label">User Query:</label>
-            <input type="text" class="form-control" id="user-query" name="user-query" value="{{post.content}}">
-          </div>
+                        <div class="form-group">
+                            <label for="user-query" class="col-form-label">User Query:</label>
+                            <input type="text" class="form-control" id="user-query" name="user-query"
+                                   value="{{post.content}}">
+                        </div>
 
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text" name="msg"></textarea>
-          </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Message:</label>
+                            <textarea class="form-control" id="message-text" name="msg"></textarea>
+                        </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name="submit" value="submit">Send message</button>
-<!--       <a class="btn btn-primary" href="{{ url_for('users.show_all_users') }}">Send message</a>-->
-      </div>
-             </form>
-      </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" name="submit" value="submit">Send message
+                            </button>
+                            <!--       <a class="btn btn-primary" href="{{ url_for('users.show_all_users') }}">Send message</a>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
     {% endfor %}
 </table>
 {% for page_num in contacts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
@@ -103,3 +109,6 @@
 {% endif %}
 {% endfor %}
 {% endblock content %}
+{% block content1 %}
+{%  include "course/left-bar-admin.html" %}
+{% endblock content1 %}

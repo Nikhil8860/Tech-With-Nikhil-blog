@@ -1,4 +1,5 @@
 from datetime import timedelta
+import os
 
 
 class Config:
@@ -13,4 +14,6 @@ class Config:
     MAIL_PORT = 587
     MAIL_USE_TLS = True
     Debug = True
+    ADMIN_MAIL = "deshiboys0@gmail.com"
+    PASSWORD = "9582750901"
     PERMANENT_SESSION_LIFETIME = timedelta(days=31)
