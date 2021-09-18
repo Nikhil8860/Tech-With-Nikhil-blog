@@ -1,12 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
+
 <div class="content-section">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">{{ legend }}</legend>
             <div class="form-group">
-                {{ form.username.label(class="form-control-label") }}
+                Name:
+<!--                {{ form.username.label(class="form-control-label") }}-->
                 {% if form.username.errors %}
                     {{ form.username(class="form-control form-control-lg is-invalid") }}
                     <div class="invalid-feedback">
@@ -20,7 +22,8 @@
             </div>
 
             <div class="form-group">
-                {{ form.email.label(class="form-control-label") }}
+                Email:
+<!--                {{ form.email.label(class="form-control-label") }}-->
                 {% if form.email.errors %}
                     {{ form.email(class="form-control form-control-lg is-invalid") }}
                     <div class="invalid-feedback">
@@ -34,7 +37,8 @@
             </div>
 
             <div class="form-group">
-                {{ form.phone.label(class="form-control-label") }}
+                Phone:
+<!--                {{ form.phone.label(class="form-control-label") }}-->
                 {% if form.phone.errors %}
                     {{ form.phone(class="form-control form-control-lg is-invalid") }}
                     <div class="invalid-feedback">
@@ -48,7 +52,8 @@
             </div>
 
             <div class="form-group">
-                {{ form.content.label(class="form-control-label") }}
+                Query:
+<!--                {{ form.content.label(class="form-control-label") }}-->
 <!--                {{form.content(rows='10',cols='75')}}-->
                 {% if form.content.errors %}
                     {{ form.content(class="form-control form-control-lg is-invalid") }}
@@ -68,3 +73,14 @@
     </form>
 </div>
 {% endblock content %}
+
+
+{% block content1 %}
+
+<div class="content-section">
+    <h1>Address</h1>
+    <hr>
+    <p>E-141, Alpha-I Greater Noida, Near Alpha-I Gate No-4</p>
+
+</div>
+{% endblock content1 %}

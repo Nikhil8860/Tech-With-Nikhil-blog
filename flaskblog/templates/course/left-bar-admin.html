@@ -1,0 +1,22 @@
+<div class="content-section">
+<h3>Admin TechWithNikhil</h3>
+<p class='text-muted'>Be On Track.
+<ul class="list-group">
+    <a href="{{ url_for('posts.new_post') }}">
+        <li class="list-group-item list-group-item-light">Add New Post</li>
+    </a>
+    <a href="{{ url_for('admin.add_batch') }}">
+        <li class="list-group-item list-group-item-light">Add New Batches</li>
+    </a>
+    <a href="{{ url_for('admin.add_batch') }}">
+        <li class="list-group-item list-group-item-light">Add Course</li>
+    </a>
+    <a href="{{ url_for('main.about') }}">
+        <li class="list-group-item list-group-item-light">Extra Topic</li>
+    </a>
+    <a href="{{ url_for('admin.show_course_enquiry') }}">
+        <li class="list-group-item list-group-item-light">Show Course Enquiry</li>
+    </a>
+</ul>
+</p>
+</div>

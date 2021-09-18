@@ -6,19 +6,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
+    <meta name="DC.title" content="Best Python Institute in Greater Noida" />
     <meta name="description"
-          content="Python Tutorials for freshers and experienced with in-depth understandig of concept wiht practical and examples">
+          content="Python Tutorials for freshers and experienced with in-depth understanding of concept with practical and examples">
     <meta name="keywords"
           content="Python, Data science, Flask, Django, Machine Learning, Best Python course, Best python Tutorials, Best python Blog, Python concept, python interview questions, python interview questions for data analyst, python interview questions for data science, python interview questions for Machine Learning, best python course, best python course online, best python course online free, best python for beginners, best python for beginners course, best python for beginners online, best python machine learning online course, best python course for beginners online">
-    <meta name="author" content="Nikhil Sharma">
+    <meta name="description"
+          content="Python Expert, Top python coder, Top Python Course, Top Python Institute , Top Python Course, Python Tutorials,Best Python in India, popular Python in delhi">
+    <meta name="author" content="Nikhil Sharma, Nikhil">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/syllabus.css') }}">
     <!--  <img src="https://source.unsplash.com/1600x900/?coding">-->
     {% if title %}
-    <title>TechWithNikhil- {{ title }}</title>
+    <title>{{ title }} - TechWithNikhil</title>
     {% else %}
     <title>TechWithNikhil</title>
     {% endif %}
@@ -35,8 +40,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarToggle">
                 <div class="navbar-nav mr-auto">
-                    <a class="nav-item nav-link" href="{{ url_for('main.home') }}">Home</a>
+                    <a class="nav-item nav-link" href="{{ url_for('main.course') }}">Course</a>
+                    <a class="nav-item nav-link" href="{{ url_for('course.upcoming_course') }}">Upcoming Batches</a>
                     <a class="nav-item nav-link" href="{{ url_for('main.about') }}">About</a>
+                    <a class="nav-item nav-link" href="{{ url_for('main.home') }}">Blog</a>
+                    <div class="dropdown">
+                      <a class="nav-item nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tutorials
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ url_for('main.home') }}">Python</a>
+                        <a class="dropdown-item" href="{{ url_for('main.data_structure') }}">Data Structure</a>
+                        <a class="dropdown-item" href="{{ url_for('main.django') }}">Django</a>
+                      </div>
+                    </div>
                 </div>
                 <!-- Navbar Right Side -->
 
@@ -51,7 +68,7 @@
                     {% endif %}
                 </div> -->
                 <div class="navbar-nav">
-                    {% if current_user.is_authenticated %}
+                    {% if current_user.is_authenticated%}
 
                     <a class="nav-item nav-link" href="{{ url_for('users.account') }}">Account</a>
                     <a class="nav-item nav-link" href="{{ url_for('users.logout') }}">Logout</a>
@@ -63,8 +80,9 @@
                             <span class="badge badge-danger">{{new_user}}</span></a>
                         {% endif %}
                     <a class="nav-item nav-link" href="{{ url_for('posts.new_post') }}">New Post</a>
-
+                    <a class="nav-item nav-link" href="{{ url_for('admin.add_batch') }}">Batch Add</a>
                     {% else %}
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Request a call back</button>
                     <a class="nav-item nav-link" href="{{ url_for('users.login') }}">Sign In</a>
                     <a class="nav-item nav-link" href="{{ url_for('users.register') }}">Sign Up</a>
                     <a class="nav-item nav-link" href="{{ url_for('users.contact_us') }}">Contact Us</a>
@@ -88,9 +106,12 @@
             {% endwith %}
             {% block content %}{% endblock %}
         </div>
-        {% if current_user.is_authenticated %}
-        <p></p>
+        {% if current_user.is_authenticated  or title=='Contact Us'%}
+        <div class="col-md-4">
+            {% block content1 %}{% endblock %}
+        </div>
         {% else %}
+
         <div class="col-md-4">
             <div class="content-section">
                 <h3>TechWithNikhil</h3>
@@ -102,8 +123,8 @@
                     <a href="{{ url_for('main.about') }}">
                         <li class="list-group-item list-group-item-light">Announcements/ Events</li>
                     </a>
-                    <a href="{{ url_for('main.about') }}">
-                        <li class="list-group-item list-group-item-light">Upcoming Post</li>
+                    <a href="{{ url_for('course.upcoming_course') }}">
+                        <li class="list-group-item list-group-item-light">Upcoming Course</li>
                     </a>
                     <a href="{{ url_for('main.about') }}">
                         <li class="list-group-item list-group-item-light">Extra Topic</li>
@@ -116,6 +137,19 @@
     </div>
 
 </main>
+{% include "course/inquery.html" %}
+<footer>
+    <div class="row fluid-container">
+        <div class="col-md-6 mt-2">
+            <a href="/">@TechWithNikhil</a>
+        </div>
+        <div class="col-md-5 mt-2">
+            <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+        </div>
+    </div>
+<!--    <a href="/">@TechWithNikhil</a>-->
+<!--    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>-->
+</footer>
 <!-- <script src="jquery-ripples min.js"></script>
 <script src="main.js"></script>
 -->
@@ -124,7 +158,13 @@
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+</script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -134,6 +174,21 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+<script src=”https://www.jdoodle.com/assets/jdoodle-pym.min.js” type=”text/javascript”></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#python").click(function(){
+    $("#section1").toggle();
+  });
+
+   $("#dsa").click(function(){
+    $("#section2").toggle();
+  });
+
+
+});
+</script>
 <!-- <footer>
 <h1>Seeds of Gold @ copyright 2019</h1>
 </footer> -->

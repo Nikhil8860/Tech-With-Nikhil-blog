@@ -1,0 +1,217 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="col-sm-12 align-items-center py-3 c-course-head aos-init aos-animate" style="background:#e7e7e7" data-aos="fade-right" data-aos-duration="1000">
+    <div class="c-course-details">
+        <div class="col-md-5">
+            <img class="img-fluid" src="{{ url_for('static', filename='course_img/dsa.jpg')}}"  alt="Python Programming">
+        </div>
+        <div class="col-md-7 py-2">
+            <h3>Data Structure and Algorithm</h3>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Request a call back</button>
+        </div>
+<div>
+     <hr>
+    <h4 class="text-danger">Course Description:</h4>
+    <hr>
+    <p>
+Python is a general purpose high level programming language.
+    </p>
+    <br>
+    <h4>Introduction to Python </h4><hr>
+    <ul>
+        <li>History of Python</li>
+        <li>Features of Python</li>
+        <li>Versions of Python</li>
+        <li>Applications of Python</li>
+        <li>Scripting vs Programming Language</li>
+        <li>Interactive Mode vs Script Mode</li>
+        <li>Installing Python</li>
+        <li>Writing First Python Program</li>
+        <li>Executing First Python Program using Interactive Mode</li>
+        <li>Executing First Python Program using Script Mode</li>
+    </ul>
+    <br>
+    <h4>Python Basic</h4><hr>
+    <ul>
+        <li>Introduction</li>
+        <li>Keywords</li>
+        <li>Identifiers</li>
+        <li>Comments</li>
+        <li>Data Type</li>
+        <li>Variables</li>
+        <li>print(),type(),id() functions</li>
+        <li>Operators</li>
+        <li>Receiving input from keyboard</li>
+        <li>Working with input() function</li>
+        <li>Type conversion functions</li>
+    </ul>
+    <br>
+    <h4>Python Operators</h4><hr>
+    <ul>
+        <li>Assignment Operators</li>
+        <li>Arithmetic Operators</li>
+        <li>Short-hand Operator</li>
+        <li>Relational Operators</li>
+        <li>Logical Operators</li>
+        <li>Bitwise Operators</li>
+        <li>Identity Operators</li>
+        <li>Membership Operators</li>
+    </ul>
+    <br>
+    <h4>Decision Making Statements</h4><hr>
+    <ul>
+        <li>if Statement</li>
+        <li>if - else Statement</li>
+        <li>elif Statement</li>
+        <li>Nested Decision Making Statement</li>
+    </ul>
+    <br>
+    <h4>Looping Statements</h4><hr>
+    <ul>
+        <li>For Loo</li>
+        <li>While Loop</li>
+        <li>else with loop</li>
+        <li>pass, break and continue</li>
+        <li>Nested Loops</li>
+    </ul>
+    <br>
+    <h4>Functions</h4><hr>
+    <ul>
+        <li>Defining a Function</li>
+        <li>Calling a Function</li>
+        <li>Types of Functions</li>
+        <li>Formal and actual Arguments</li>
+        <li>Named and keyword arguments</li>
+        <li>Default and Postional Arguments</li>
+        <li>*args and **kwargs Arguments</li>
+        <li>Lambda function</li>
+        <li>Local and Global Variables</li>
+    </ul>
+    <br>
+    <h4>Modules &amp; Packages</h4><hr>
+    <ul>
+        <li>Need of modules</li>
+        <li>Creating a module and Importing Module</li>
+        <li>Different ways of importing</li>
+        <li>Working with Built-in Modules like math,sys,os,datetime,random.</li>
+        <li>Creating a Package and Using a package</li>
+    </ul>
+    <br>
+    <h4>Object Oriented Programming</h4><hr>
+    <ul>
+        <li>Procedural vs Object Oriented Programming</li>
+        <li>Features of OOP</li>
+        <li>Defining a Class</li>
+        <li>Variables and Methods in a Class</li>
+        <li>Creating Objects</li>
+        <li>Constructor</li>
+        <li>Instance vs Class Member</li>
+        <li>Abstraction, Encapsulation, Inheritance</li>
+        <li>Data Hiding</li>
+        <li>Polymorphism</li>
+        <li>Operator Overloading</li>
+        <li>Method Overriding</li>
+        <li>Abstract method and class</li>
+        <li>Properties</li>
+    </ul>
+    <br>
+    <h4>Python Built-in Data Types</h4><hr>
+    <br>
+    <h4>Strings</h4><hr>
+    <ul>
+        <li>Creating Strings </li>
+        <li>Strings Immutability</li>
+        <li>String Indexing and Slicing</li>
+        <li>String Formatting</li>
+        <li>String Functions and String Operators</li>
+        <li>String Joining and Spliting</li>
+    </ul>
+    <br>
+    <h4>List</h4><hr>
+    <ul>
+        <li>Creating and Accessing Lists</li>
+        <li>List Mutability</li>
+        <li>List operators and Methods</li>
+        <li>Generating List using range()</li>
+        <li>Searching in List</li>
+        <li>User defined type List</li>
+        <li>Converting String into List</li>
+        <li>Converting List into String</li>
+        <li>Nested Lists</li>
+    </ul>
+    <br>
+    <h4>Tuples</h4><hr>
+    <ul>
+        <li>Creating Tuple</li>
+        <li>Tuple indexing, slicing and functions</li>
+        <li>Tuple operators and Methods</li>
+        <li>Nested Tuples</li>
+        <li>Converting String and List to Tuple</li>
+        <li>Converting Tuple to String and List </li>
+    </ul>
+    <br>
+    <h4>Set</h4><hr>
+    <ul>
+        <li>Creating a Set</li>
+        <li>Normal and frozen Set</li>
+        <li>Creating and modify Empty Set</li>
+        <li>Add, removing and discarding elements to Set</li>
+        <li>Coverting String, List and Tuple to Set</li>
+        <li>Coverting Set into String, List and Tuple</li>
+    </ul>
+    <br>
+    <h4>Directory</h4><hr>
+    <ul>
+        <li>Creating Direvctory and Directory mutabilityr</li>
+        <li>Adding and Deleting  keys value pairsr</li>
+        <li>Looping through Directoryr</li>
+        <li>Extracting only keys and only values  from Directoryr</li>
+        <li>Creating Dictionary from List and Tupler</li>
+        <li>Dictionary comprehension Iterators, Generators, r</li>
+        <li>Decorator</li>
+    </ul>
+    <br>
+    <h4>Exception Handling</h4><hr>
+    <ul>
+        <li>Errors and Exceptions</li>
+        <li>Exception Handling</li>
+        <li>Try, Except, Finally</li>
+        <li>User-defined Exceptions</li>
+    </ul>
+    <br>
+    <h4>File Handling</h4><hr>
+    <ul>
+        <li>Creating, Opening and Closing  a File</li>
+        <li>Writing and Appending to a File</li>
+        <li>seek() and tell() methods</li>
+        <li>readline() and readlines() methods</li>
+        <li>Working with Characters and Words in file.</li>
+        <li>The with Statement</li>
+    </ul>
+    <br>
+    <h4>Database</h4><hr>
+    <ul>
+        <li>Introduction to Databases</li>
+        <li>Creating Database Connections</li>
+        <li>Inserting, Fetching, Updating and Deleting data</li>
+        <li>Transactions(Commit and Rollback)</li>
+        <li>Handling Errors</li>
+    </ul>
+    <br>
+    <h4>GUI Programming</h4><hr>
+    <ul>
+        <li>Introduction to Tkinter Programming</li>
+        <li>Tkinter Widgets (Label, Button, Entry, ComboBox,  </li>
+        <li>RadioButton, CheckBox, ListBox, TreeView, Frame)</li>
+    </ul>
+    <br>
+    <h4>Widgets Event Handling</h4><hr>
+    <br>
+    <h4>Project Work</h4>
+    <br>
+</div>
+</div>
+</div>
+{% include "course/inquery.html" %}
+
+{% endblock content %}
