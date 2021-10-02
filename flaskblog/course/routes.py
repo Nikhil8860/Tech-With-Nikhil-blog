@@ -23,7 +23,7 @@ def flask():
 
 @course.route("/dsa")
 def dsa():
-    return render_template('course/dsa.html', title='Flask')
+    return render_template('course/dsa.html', title='Data Structure and Algorithm')
 
 
 @course.route('/enquiry', methods=['GET', 'POST'])

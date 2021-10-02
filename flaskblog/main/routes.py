@@ -18,7 +18,8 @@ def course():
 @main.route("/python-blog")
 def home():
     page = request.args.get('page', 1, type=int)
-    posts = Post.query.order_by(Post.date_posted.asc()).paginate(page=page, per_page=5)
+    # posts = Post.query.order_by(Post.date_posted.asc()).paginate(page=page, per_page=5)
+    posts = Post.query.filter_by(course_id=0).paginate(page=page, per_page=5)
     new_users = len(Contact.query.filter_by(is_seen=0).all())
     return render_template('home.html', posts=posts, new_user=new_users, title='Blog')
 
@@ -36,7 +37,7 @@ def django():
     page = request.args.get('page', 1, type=int)
     posts = Post.query.filter_by(course_id=3).paginate(page=page, per_page=5)
     new_users = len(Contact.query.filter_by(is_seen=0).all())
-    return render_template('django-blog.html', posts=posts, new_user=new_users, title='Data Structure')
+    return render_template('django-blog.html', posts=posts, new_user=new_users, title='Django')
 
 
 @main.route("/about")
