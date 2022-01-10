@@ -6,7 +6,7 @@ from flaskblog.users.forms import (RegistrationForm, LoginForm, UpdateAccountFor
                                    RequestResetForm, ResetPasswordForm, ContactForm)
 from flaskblog.users.utils import save_picture, send_reset_email, sendmail_attach_mktcloud
 from sqlalchemy import desc
-
+from flaskblog.config import Config
 users = Blueprint('users', __name__)
 
 
@@ -118,10 +118,10 @@ def contact_us():
     form = ContactForm()
     if form.validate_on_submit():
         user = Contact.query.filter_by(email=form.email.data).first()
-        if user:
-            flash('Email already Exists!', 'warning')
-            return render_template('contact.html', title='Contact Us',
-                                   form=form, legend='Contact Form')
+        # if user:
+        #     flash('Email already Exists!', 'warning')
+        #     return render_template('contact.html', title='Contact Us',
+        #                            form=form, legend='Contact Form')
         contact = Contact(username=form.username.data, email=form.email.data, phone=form.phone.data,
                           content=form.content.data)
         print(contact.email)
@@ -148,10 +148,14 @@ def show_all_users():
             db.session.add(data)
             db.session.commit()
         flash("Mail send successfully!", "info")
-    page = request.args.get('page', 1, type=int)
-    contact = Contact.query.order_by(Contact.contact_posted.desc()).paginate(page=page, per_page=5)
-    new_users = len(Contact.query.filter_by(is_seen=0).all())
-    return render_template('show-users.html', contacts=contact, title='show users', new_user=new_users)
+    if current_user.email == Config.ADMIN_MAIL:
+        page = request.args.get('page', 1, type=int)
+        contact = Contact.query.order_by(Contact.contact_posted.desc()).paginate(page=page, per_page=5)
+        new_users = len(Contact.query.filter_by(is_seen=0).all())
+        return render_template('show-users.html', contacts=contact, title='show users', new_user=new_users)
+    else:
+        flash("Only Admin can see user request!", "warning")
+        return redirect(url_for('main.course'))
 
 
 @users.route("/show-users-requests-new")

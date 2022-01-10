@@ -13,19 +13,23 @@ admin = Blueprint('admin', __name__)
 @login_required
 def add_batch():
     form = AddBatchForm()
-    if form.validate_on_submit():
-        start = form.start_at.data
-        end = form.end_at.data
-        time = str(start) + "-" + str(end)
-        days = ",".join(form.batch_days.data)
-        date = form.date.data
-        post = AddBatch(course_name=form.course.data, days=days, time=time, date=date)
-        db.session.add(post)
-        db.session.commit()
+    if current_user.email == Config.ADMIN_MAIL:
+        if form.validate_on_submit():
+            start = form.start_at.data
+            end = form.end_at.data
+            time = str(start) + "-" + str(end)
+            days = ",".join(form.batch_days.data)
+            date = form.date.data
+            post = AddBatch(course_name=form.course.data, days=days, time=time, date=date)
+            db.session.add(post)
+            db.session.commit()
 
-        flash('New Batch Added Successfully!', 'success')
-        return redirect(url_for('admin.add_batch'))
-    return render_template('admin/add-batch.html', title='Add New Batch', form=form, legend='Add New Batch')
+            flash('New Batch Added Successfully!', 'success')
+            return redirect(url_for('admin.add_batch'))
+        return render_template('admin/add-batch.html', title='Add New Batch', form=form, legend='Add New Batch')
+    else:
+        flash("Only Admin can add Batch", "warning")
+        return redirect(url_for("main.course"))
 
 
 @admin.route("/show-course-enquiry")
@@ -35,6 +39,8 @@ def show_course_enquiry():
         page = request.args.get('page', 1, type=int)
         contact = Enquiry.query.order_by(Enquiry.enquiry_date.desc()).paginate(page=page, per_page=10)
         return render_template('admin/show-course-enquiry.html', contacts=contact, title='Course Enquiry')
+    else:
+        flash("Only Admin can see course enquiry", "warning")
     return redirect('/')
 
 

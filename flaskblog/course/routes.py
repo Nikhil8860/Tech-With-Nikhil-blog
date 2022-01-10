@@ -3,6 +3,7 @@ from flaskblog.models import AddBatch
 from flaskblog.models import Enquiry
 from flaskblog import db
 from datetime import datetime
+
 course = Blueprint('course', __name__)
 
 
@@ -24,6 +25,16 @@ def flask():
 @course.route("/dsa")
 def dsa():
     return render_template('course/dsa.html', title='Data Structure and Algorithm')
+
+
+@course.route("/data-science")
+def data_science():
+    return render_template('course/data-science.html', title='Data Science')
+
+
+@course.route("/machine-learning")
+def machine_learning():
+    return render_template('course/machine-learning.html', title='Machine Learning')
 
 
 @course.route('/enquiry', methods=['GET', 'POST'])
