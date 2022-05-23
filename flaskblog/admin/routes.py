@@ -1,3 +1,5 @@
+import datetime
+
 from flask import render_template, request, Blueprint, redirect, url_for, flash, current_app as app
 from flaskblog.admin.forms import AddBatchForm
 from flaskblog.models import AddBatch, Enquiry
@@ -49,4 +51,5 @@ def show_course_enquiry():
 def download_enquiry():
     query_sets = Enquiry.query.all()
     column_names = ['name', 'phone', 'message', 'enquiry_date']
-    return excel.make_response_from_query_sets(query_sets, column_names, "csv")
+    file_name = f"Details_{datetime.datetime.now()}"
+    return excel.make_response_from_query_sets(query_sets, column_names, "csv", file_name=file_name)
