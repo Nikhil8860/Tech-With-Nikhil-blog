@@ -1,3 +1,10 @@
 /venv
 /.vscode
 /.pyc
+*.pyc
+
+# Gradle:
+.idea/misc.xml
+.idea/tech-with-nikhil-blog.iml
+*.iml
+*.xml
