@@ -2,15 +2,11 @@ import os
 import secrets
 from PIL import Image
 from flask import url_for, current_app
-from flask_mail import Message
-from flaskblog import mail
 
 import smtplib as sl
-from smtplib import SMTPException
-from email import encoders
-from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from ..config import Config
 import ssl
 
 
@@ -50,8 +46,8 @@ def sendmail_attach_mktcloud(to_mail, content=None, users_query=None):
         body = content + '\n\n\n\n' + users_query
     else:
         body = content
-    sender_email = "deshiboys0@gmail.com"
-    password = "9582750901"
+    sender_email = Config.ADMIN_MAIL
+    password = Config.PASSWORD
     receiver_email = [to_mail]
 
     message = MIMEMultipart()
@@ -65,4 +61,3 @@ def sendmail_attach_mktcloud(to_mail, content=None, users_query=None):
         server.login(sender_email, password=password)
         server.sendmail(sender_email, receiver_email, text)
         print("Sent email with Subject --", subject)
-

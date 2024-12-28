@@ -1,4 +1,3 @@
-import xlrd
 import pandas as pd
 
 
@@ -186,17 +185,29 @@ def rotate_n_times(arr, d):
         left_rotate_by_one(arr, i)
     return arr
 
+
 def find_majority(arr):
     for i in range(len(arr)):
         count = 1
-        for j in range(i+1, len(arr)):
+        for j in range(i + 1, len(arr)):
             if arr[i] == arr[j]:
-                count+=1
-        if count > len(arr)//2:
+                count += 1
+        if count > len(arr) // 2:
             return i
     return -1
+
+
 if __name__ == '__main__':
-    a = [8,7,6,8,6,8,1]
+    person = {"name": "ali", "age": None}
+    # LBYL: Look Before You Leap.
+    if person.get("age"):
+        if person.get("age") < 10:
+            print("little man!")
+    print("hello there")
+    quit()
+    print(move_non_zero([1, 0, 1, 1, 1, 1, 1, 0, 1, 3, 4]))
+    quit()
+    a = [8, 7, 6, 8, 6, 8, 1]
     print(find_majority(a))
     # quit()
     a = [2, 3, 4, 5, 1]
@@ -207,4 +218,3 @@ if __name__ == '__main__':
     # printMissingElements(arr, N)
     # arr = [5, 10, 12, 15, 20, 43,325,2,6435,36,3453,654,63,53]
     # print(find_second_largest(arr, len(arr)))
-
